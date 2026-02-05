@@ -3,11 +3,8 @@
 namespace App\Console\Commands;
 
 use App\Models\Category;
-use App\Models\Classification;
 use App\Models\Collection;
 use App\Models\Color;
-use App\Models\Finish;
-use App\Models\MetalType;
 use App\Models\Product;
 use App\Models\Project;
 use App\Models\Style;
@@ -18,7 +15,6 @@ use App\Traits\Common;
 use Exception;
 use Illuminate\Console\Command;
 use Illuminate\Database\QueryException;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class Products extends Command
