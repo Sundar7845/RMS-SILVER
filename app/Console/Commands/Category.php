@@ -50,7 +50,7 @@ class Category extends Command
             $categories = DB::select("
             SELECT category_id, project
             FROM localproducts
-            WHERE project = 'SIL SOLID IDOL'
+            WHERE project = 'ELECTRO FORMING'
             GROUP BY category_id, project
             ORDER BY category_id ASC
         ");

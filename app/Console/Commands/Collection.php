@@ -54,7 +54,7 @@ class Collection extends Command
                 project,
                 MAX(category_id) AS category_id
             FROM localproducts
-            WHERE project = 'SIL SOLID IDOL'
+            WHERE project = 'ELECTRO FORMING'
               AND crwcolcode IS NOT NULL
               AND crwcolcode != ''
             GROUP BY crwcolcode, project
