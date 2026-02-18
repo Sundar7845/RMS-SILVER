@@ -144,7 +144,7 @@ class Products extends Command
                         'product_unique_id' => $item->product_unique_id,
                     ],
                     [
-                        'product_image' => $item->product_unique_id . '.jpg',
+                        'product_image' => str_replace('+', '-', $item->product_unique_id) . '.jpg',
                         'product_name' => $item->product_name,
 
                         'height' => $item->height ?? null,
