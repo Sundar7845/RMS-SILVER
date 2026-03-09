@@ -37,7 +37,7 @@ class RetailerController extends Controller
     {
         $retailer = "";
         $retailer = User::select('users.*', 'dealers.company_name')
-            ->join('dealers', 'users.preferred_dealer_id', 'dealers.user_id')
+            ->leftjoin('dealers', 'users.preferred_dealer_id', 'dealers.user_id')
             ->where('users.role_id', Roles::Retailer)
             ->get();
         return datatables()->of($retailer)

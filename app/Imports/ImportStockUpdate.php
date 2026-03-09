@@ -12,12 +12,14 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use Exception;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Concerns\WithChunkReading;
 
 class ImportStockUpdate implements ToCollection, WithHeadingRow
 {
     protected $processedProductIds = []; // Keep track of processed product IDs globally
+    protected $missingSkus = []; // store SKUs not found in products table
 
     public function collection(Collection $rows)
     {
@@ -44,8 +46,13 @@ class ImportStockUpdate implements ToCollection, WithHeadingRow
                     ->orderBy('id', 'desc')
                     ->first();
 
+                // ❌ SKU not found in product table
                 if (!$product) {
-                    // Skip if the product is not found
+
+                    $this->missingSkus[] = $row['product_sku'];
+
+                    Log::error('Stock Import Missing SKU: ' . $row['product_sku']);
+
                     continue;
                 }
 
@@ -123,5 +130,10 @@ class ImportStockUpdate implements ToCollection, WithHeadingRow
     public function getProcessedProductIds()
     {
         return $this->processedProductIds;
+    }
+
+    public function getMissingSkus()
+    {
+        return $this->missingSkus;
     }
 }

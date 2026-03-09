@@ -88,7 +88,7 @@ function orderList() {
             },
         },
         fnRowCallback: serialNoCount,
-        createdRow: function (row, data, dataIndex) {
+        createdRow: function (row, data, dataIndex) {                                              
             // Add a click event listener to the name column
             $(row)
                 .find("td:eq(4)")

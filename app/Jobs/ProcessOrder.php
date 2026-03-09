@@ -37,7 +37,7 @@ class ProcessOrder implements ShouldQueue
     public function __construct($order, $user)
     {
         $this->order = $order;
-        $this->user = $user;
+        $this->user = $user; 
     }
 
     public function handle()

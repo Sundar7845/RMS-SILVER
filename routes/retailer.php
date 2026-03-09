@@ -67,6 +67,13 @@ Route::prefix('retailer')->group(function () {
         Route::get('jewelleryreadystock', [\App\Http\Controllers\Retailer\EF\ReadyStockController::class, 'jewelleryReadyStock'])->name('retailerjewelleryreadystock');
         Route::get('indianiareadystock', [\App\Http\Controllers\Retailer\EF\ReadyStockController::class, 'indianiaReadyStock'])->name('retailerindianiareadystock');
         Route::get('utensilreadystock', [\App\Http\Controllers\Retailer\EF\ReadyStockController::class, 'utensilReadyStock'])->name('retailerutensilreadystock');
+        Route::get('mmdreadystock', [\App\Http\Controllers\Retailer\EF\ReadyStockController::class, 'mmdReadyStock'])->name('retailermmdreadystock');
+        Route::get('sjrumireadyStock', [\App\Http\Controllers\Retailer\EF\ReadyStockController::class, 'sjrumireadyStock'])->name('retailerSJrumireadyStock');
+        Route::get('efsjreadystock', [\App\Http\Controllers\Retailer\EF\ReadyStockController::class, 'efsjreadyStock'])->name('retailerefsjreadystock');
+        Route::get('payalreadystock', [\App\Http\Controllers\Retailer\EF\ReadyStockController::class, 'payalReadyStock'])->name('retailerpayalreadystock');
+        Route::get('featherlightreadystock', [\App\Http\Controllers\Retailer\EF\ReadyStockController::class, 'featherlightreadyStock'])->name('retailerfeatherlightreadystock');
+        Route::get('impressareadystock', [\App\Http\Controllers\Retailer\EF\ReadyStockController::class, 'impressaReadyStock'])->name('retailerimpressareadystock');
+        Route::get('coinreadystock', [\App\Http\Controllers\Retailer\EF\ReadyStockController::class, 'coinReadyStock'])->name('retailercoinreadystock');
         Route::get('productdetail/{id}', [\App\Http\Controllers\Retailer\EF\ReadyStockController::class, 'productDetail'])->name('retailerproductdetail');
         Route::post('addtocart', [\App\Http\Controllers\Retailer\EF\ReadyStockController::class, 'addToCart'])->name('retaileraddtocart');
         Route::post('addforcart', [\App\Http\Controllers\Retailer\EF\ReadyStockController::class, 'addForCart'])->name('retaileraddforcart');
@@ -94,7 +101,7 @@ Route::prefix('retailer')->group(function () {
 
         //boxwiseproduct
         Route::get('boxwiseproduct/{id}', [App\Http\Controllers\Retailer\EF\ReadyStockController::class, 'getBoxwiseProduct'])->name('retailerboxwiseproduct');
-       
+
         //puritywiseproduct
         Route::get('puritywiseproduct/{id}', [App\Http\Controllers\Retailer\EF\ReadyStockController::class, 'getPuritywiseProduct'])->name('retailerpuritywiseproduct');
 

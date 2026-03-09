@@ -341,6 +341,300 @@ class ReadyStockController extends Controller
         return view('retailer.readystock.readystock', compact('allProduct', 'product', 'decryptedProjectId', 'project_id', 'breadcrum', 'breadcrumUrl', 'stock'));
     }
 
+    public function payalReadyStock(Request $request)
+    {
+        $user_id = Auth::user()->id;
+        $product = Product::select('products.*', 'wishlists.is_favourite')
+            ->leftJoin('wishlists', function ($join) use ($user_id) {
+                $join->on('wishlists.product_id', '=', 'products.id')
+                    ->where('wishlists.user_id', '=', $user_id);
+            })
+            ->where('products.is_active', 1)
+            ->whereNull('products.deleted_at')
+            ->where('products.project_id', Projects::PAYAL)
+            ->where('products.qty', '>', 0)
+            ->orderBy('products.qty', 'DESC');
+
+        // Get all the results and filter out products without an image
+        $filteredProducts = $product->get()->filter(function ($product) {
+            return File::exists(public_path("upload/product/{$product->product_image}"));
+        });
+
+        // Manually paginate the filtered products
+        $page = request()->get('page', 1);
+        $perPage = $this->paginate;
+        $paginatedProducts = new LengthAwarePaginator(
+            $filteredProducts->forPage($page, $perPage),
+            $filteredProducts->count(),
+            $perPage,
+            $page,
+            ['path' => request()->url(), 'query' => request()->query()]
+        );
+
+        $product = $paginatedProducts;
+
+        $project_id = Projects::PAYAL;
+        $allProduct = Product::select('id')->where('project_id', Projects::PAYAL)->where('qty', '>', 0)->get();
+        $stock = 1;
+        $breadcrum = 'PAYAL Ready Stock';
+        $breadcrumUrl = route('retailerpayalreadystock');
+        $decryptedProjectId = Projects::PAYAL;
+        $request->session()->forget('ret_ses');
+        return view('retailer.readystock.readystock', compact('allProduct', 'product', 'decryptedProjectId', 'project_id', 'breadcrum', 'breadcrumUrl', 'stock'));
+    }
+
+    public function coinReadyStock(Request $request)
+    {
+        $user_id = Auth::user()->id;
+        $product = Product::select('products.*', 'wishlists.is_favourite')
+            ->leftJoin('wishlists', function ($join) use ($user_id) {
+                $join->on('wishlists.product_id', '=', 'products.id')
+                    ->where('wishlists.user_id', '=', $user_id);
+            })
+            ->where('products.is_active', 1)
+            ->whereNull('products.deleted_at')
+            ->where('products.project_id', Projects::COIN)
+            ->where('products.qty', '>', 0)
+            ->orderBy('products.qty', 'DESC');
+
+        // Get all the results and filter out products without an image
+        $filteredProducts = $product->get()->filter(function ($product) {
+            return File::exists(public_path("upload/product/{$product->product_image}"));
+        });
+
+        // Manually paginate the filtered products
+        $page = request()->get('page', 1);
+        $perPage = $this->paginate;
+        $paginatedProducts = new LengthAwarePaginator(
+            $filteredProducts->forPage($page, $perPage),
+            $filteredProducts->count(),
+            $perPage,
+            $page,
+            ['path' => request()->url(), 'query' => request()->query()]
+        );
+
+        $product = $paginatedProducts;
+
+        $project_id = Projects::COIN;
+        $allProduct = Product::select('id')->where('project_id', Projects::COIN)->where('qty', '>', 0)->get();
+        $stock = 1;
+        $breadcrum = 'COIN Ready Stock';
+        $breadcrumUrl = route('retailercoinreadystock');
+        $decryptedProjectId = Projects::COIN;
+        $request->session()->forget('ret_ses');
+        return view('retailer.readystock.readystock', compact('allProduct', 'product', 'decryptedProjectId', 'project_id', 'breadcrum', 'breadcrumUrl', 'stock'));
+    }
+
+    public function sjrumireadyStock(Request $request)
+    {
+        $user_id = Auth::user()->id;
+        $product = Product::select('products.*', 'wishlists.is_favourite')
+            ->leftJoin('wishlists', function ($join) use ($user_id) {
+                $join->on('wishlists.product_id', '=', 'products.id')
+                    ->where('wishlists.user_id', '=', $user_id);
+            })
+            ->where('products.is_active', 1)
+            ->whereNull('products.deleted_at')
+            ->where('products.project_id', Projects::SJRUMI)
+            ->where('products.qty', '>', 0)
+            ->orderBy('products.qty', 'DESC');
+
+        // Get all the results and filter out products without an image
+        $filteredProducts = $product->get()->filter(function ($product) {
+            return File::exists(public_path("upload/product/{$product->product_image}"));
+        });
+
+        // Manually paginate the filtered products
+        $page = request()->get('page', 1);
+        $perPage = $this->paginate;
+        $paginatedProducts = new LengthAwarePaginator(
+            $filteredProducts->forPage($page, $perPage),
+            $filteredProducts->count(),
+            $perPage,
+            $page,
+            ['path' => request()->url(), 'query' => request()->query()]
+        );
+
+        $product = $paginatedProducts;
+
+        $project_id = Projects::SJRUMI;
+        $allProduct = Product::select('id')->where('project_id', Projects::SJRUMI)->where('qty', '>', 0)->get();
+        $stock = 1;
+        $breadcrum = 'SJRUMI Ready Stock';
+        $breadcrumUrl = route('retailersjrumireadystock');
+        $decryptedProjectId = Projects::SJRUMI;
+        $request->session()->forget('ret_ses');
+        return view('retailer.readystock.readystock', compact('allProduct', 'product', 'decryptedProjectId', 'project_id', 'breadcrum', 'breadcrumUrl', 'stock'));
+    }
+
+    public function efsjReadyStock(Request $request)
+    {
+        $user_id = Auth::user()->id;
+        $product = Product::select('products.*', 'wishlists.is_favourite')
+            ->leftJoin('wishlists', function ($join) use ($user_id) {
+                $join->on('wishlists.product_id', '=', 'products.id')
+                    ->where('wishlists.user_id', '=', $user_id);
+            })
+            ->where('products.is_active', 1)
+            ->whereNull('products.deleted_at')
+            ->where('products.project_id', Projects::EFSJ)
+            ->where('products.qty', '>', 0)
+            ->orderBy('products.qty', 'DESC');
+
+        // Get all the results and filter out products without an image
+        $filteredProducts = $product->get()->filter(function ($product) {
+            return File::exists(public_path("upload/product/{$product->product_image}"));
+        });
+
+        // Manually paginate the filtered products
+        $page = request()->get('page', 1);
+        $perPage = $this->paginate;
+        $paginatedProducts = new LengthAwarePaginator(
+            $filteredProducts->forPage($page, $perPage),
+            $filteredProducts->count(),
+            $perPage,
+            $page,
+            ['path' => request()->url(), 'query' => request()->query()]
+        );
+
+        $product = $paginatedProducts;
+
+        $project_id = Projects::EFSJ;
+        $allProduct = Product::select('id')->where('project_id', Projects::EFSJ)->where('qty', '>', 0)->get();
+        $stock = 1;
+        $breadcrum = 'EFSJ Ready Stock';
+        $breadcrumUrl = route('retailerefsjreadystock');
+        $decryptedProjectId = Projects::EFSJ;
+        $request->session()->forget('ret_ses');
+        return view('retailer.readystock.readystock', compact('allProduct', 'product', 'decryptedProjectId', 'project_id', 'breadcrum', 'breadcrumUrl', 'stock'));
+    }
+
+    public function featherlightReadyStock(Request $request)
+    {
+        $user_id = Auth::user()->id;
+        $product = Product::select('products.*', 'wishlists.is_favourite')
+            ->leftJoin('wishlists', function ($join) use ($user_id) {
+                $join->on('wishlists.product_id', '=', 'products.id')
+                    ->where('wishlists.user_id', '=', $user_id);
+            })
+            ->where('products.is_active', 1)
+            ->whereNull('products.deleted_at')
+            ->where('products.project_id', Projects::FEATHERLIGHT)
+            ->where('products.qty', '>', 0)
+            ->orderBy('products.qty', 'DESC');
+
+        // Get all the results and filter out products without an image
+        $filteredProducts = $product->get()->filter(function ($product) {
+            return File::exists(public_path("upload/product/{$product->product_image}"));
+        });
+
+        // Manually paginate the filtered products
+        $page = request()->get('page', 1);
+        $perPage = $this->paginate;
+        $paginatedProducts = new LengthAwarePaginator(
+            $filteredProducts->forPage($page, $perPage),
+            $filteredProducts->count(),
+            $perPage,
+            $page,
+            ['path' => request()->url(), 'query' => request()->query()]
+        );
+
+        $product = $paginatedProducts;
+
+        $project_id = Projects::FEATHERLIGHT;
+        $allProduct = Product::select('id')->where('project_id', Projects::FEATHERLIGHT)->where('qty', '>', 0)->get();
+        $stock = 1;
+        $breadcrum = 'FEATHERLIGHT Ready Stock';
+        $breadcrumUrl = route('retailerfeatherlightreadystock');
+        $decryptedProjectId = Projects::FEATHERLIGHT;
+        $request->session()->forget('ret_ses');
+        return view('retailer.readystock.readystock', compact('allProduct', 'product', 'decryptedProjectId', 'project_id', 'breadcrum', 'breadcrumUrl', 'stock'));
+    }
+
+    public function impressaReadyStock(Request $request)
+    {
+        $user_id = Auth::user()->id;
+        $product = Product::select('products.*', 'wishlists.is_favourite')
+            ->leftJoin('wishlists', function ($join) use ($user_id) {
+                $join->on('wishlists.product_id', '=', 'products.id')
+                    ->where('wishlists.user_id', '=', $user_id);
+            })
+            ->where('products.is_active', 1)
+            ->whereNull('products.deleted_at')
+            ->where('products.project_id', Projects::IMPRESSA)
+            ->where('products.qty', '>', 0)
+            ->orderBy('products.qty', 'DESC');
+
+        // Get all the results and filter out products without an image
+        $filteredProducts = $product->get()->filter(function ($product) {
+            return File::exists(public_path("upload/product/{$product->product_image}"));
+        });
+
+        // Manually paginate the filtered products
+        $page = request()->get('page', 1);
+        $perPage = $this->paginate;
+        $paginatedProducts = new LengthAwarePaginator(
+            $filteredProducts->forPage($page, $perPage),
+            $filteredProducts->count(),
+            $perPage,
+            $page,
+            ['path' => request()->url(), 'query' => request()->query()]
+        );
+
+        $product = $paginatedProducts;
+
+        $project_id = Projects::IMPRESSA;
+        $allProduct = Product::select('id')->where('project_id', Projects::IMPRESSA)->where('qty', '>', 0)->get();
+        $stock = 1;
+        $breadcrum = 'IMPRESSA Ready Stock';
+        $breadcrumUrl = route('retailerimpressareadystock');
+        $decryptedProjectId = Projects::IMPRESSA;
+        $request->session()->forget('ret_ses');
+        return view('retailer.readystock.readystock', compact('allProduct', 'product', 'decryptedProjectId', 'project_id', 'breadcrum', 'breadcrumUrl', 'stock'));
+    }
+
+    public function mmdReadyStock(Request $request)
+    {
+        $user_id = Auth::user()->id;
+        $product = Product::select('products.*', 'wishlists.is_favourite')
+            ->leftJoin('wishlists', function ($join) use ($user_id) {
+                $join->on('wishlists.product_id', '=', 'products.id')
+                    ->where('wishlists.user_id', '=', $user_id);
+            })
+            ->where('products.is_active', 1)
+            ->whereNull('products.deleted_at')
+            ->where('products.project_id', Projects::MMD)
+            ->where('products.qty', '>', 0)
+            ->orderBy('products.qty', 'DESC');
+
+        // Get all the results and filter out products without an image
+        $filteredProducts = $product->get()->filter(function ($product) {
+            return File::exists(public_path("upload/product/{$product->product_image}"));
+        });
+
+        // Manually paginate the filtered products
+        $page = request()->get('page', 1);
+        $perPage = $this->paginate;
+        $paginatedProducts = new LengthAwarePaginator(
+            $filteredProducts->forPage($page, $perPage),
+            $filteredProducts->count(),
+            $perPage,
+            $page,
+            ['path' => request()->url(), 'query' => request()->query()]
+        );
+
+        $product = $paginatedProducts;
+
+        $project_id = Projects::MMD;
+        $allProduct = Product::select('id')->where('project_id', Projects::MMD)->where('qty', '>', 0)->get();
+        $stock = 1;
+        $breadcrum = 'MMD Ready Stock';
+        $breadcrumUrl = route('retailermmdreadystock');
+        $decryptedProjectId = Projects::MMD;
+        $request->session()->forget('ret_ses');
+        return view('retailer.readystock.readystock', compact('allProduct', 'product', 'decryptedProjectId', 'project_id', 'breadcrum', 'breadcrumUrl', 'stock'));
+    }
+
     function productDetail($id)
     {
         ini_set('max_execution_time', 1800); //3 minutes

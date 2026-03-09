@@ -56,6 +56,7 @@ class Product extends Model
         'keywordtags',
         'otherrate',
         'is_active',
+        'image_exists',
         'created_by',
         'updated_by',
         'deleted_by'

@@ -132,26 +132,96 @@
                 {{-- navbar --}}
                 @include('retailer.panel.navbar')
             </nav>
-
+            @php
+                $availableProjects = App\Models\Product::where('qty', '>', 0)
+                    ->select('project_id', 'product_image')
+                    ->get()
+                    ->filter(function ($product) {
+                        return !empty($product->product_image) &&
+                            Illuminate\Support\Facades\File::exists(
+                                public_path('upload/product/' . $product->product_image),
+                            );
+                    })
+                    ->pluck('project_id')
+                    ->unique()
+                    ->values()
+                    ->toArray();
+            @endphp
             <div class="main-menu-section d-none d-lg-block">
                 <ul class="container p-2 nav gap-5 justify-content-center text-white">
-                    <li class="nav-item">
-                        <a href="{{ route('retailerefreadystock') }}">ElectroForming Idols</a>
-                    </li>
+                    @if (in_array(App\Enums\Projects::ELECTROFORMING, $availableProjects))
+                        <li class="nav-item">
+                            <a href="{{ route('retailerefreadystock') }}">ElectroForming Idols</a>
+                        </li>
+                    @endif
 
-                    <li class="nav-item">
-                        <a href="{{ route('retailersireadystock') }}">Solid
-                            Idols</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{ route('retailerjewelleryreadystock') }}">Jewellery</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{ route('retailerindianiareadystock') }}">Indiania</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{ route('retailerutensilreadystock') }}">Utensil</a>
-                    </li>
+                    @if (in_array(App\Enums\Projects::SOLIDIDOL, $availableProjects))
+                        <li class="nav-item">
+                            <a href="{{ route('retailersireadystock') }}">Solid Idols</a>
+                        </li>
+                    @endif
+
+                    @if (in_array(App\Enums\Projects::CASTING, $availableProjects))
+                        <li class="nav-item">
+                            <a href="{{ route('retailerjewelleryreadystock') }}">Jewellery</a>
+                        </li>
+                    @endif
+
+                    @if (in_array(App\Enums\Projects::INIDIANIA, $availableProjects))
+                        <li class="nav-item">
+                            <a href="{{ route('retailerindianiareadystock') }}">Indiania</a>
+                        </li>
+                    @endif
+
+                    @if (in_array(App\Enums\Projects::UTENSIL, $availableProjects))
+                        <li class="nav-item">
+                            <a href="{{ route('retailerutensilreadystock') }}">Utensil</a>
+                        </li>
+                    @endif
+
+                    @if (in_array(App\Enums\Projects::IMPRESSA, $availableProjects))
+                        <li class="nav-item">
+                            <a href="{{ route('retailerimpressareadystock') }}">Impressa</a>
+                        </li>
+                    @endif
+
+                    @if (in_array(App\Enums\Projects::MMD, $availableProjects))
+                        <li class="nav-item">
+                            <a href="{{ route('retailermmdreadystock') }}">MMD</a>
+                        </li>
+                    @endif
+
+                    @if (in_array(App\Enums\Projects::COIN, $availableProjects))
+                        <li class="nav-item">
+                            <a href="{{ route('retailercoinreadystock') }}">Coin</a>
+                        </li>
+                    @endif
+
+                    @if (in_array(App\Enums\Projects::PAYAL, $availableProjects))
+                        <li class="nav-item">
+                            <a href="{{ route('retailerpayalreadystock') }}">Payal</a>
+                        </li>
+                    @endif
+
+                    @if (in_array(App\Enums\Projects::EFSJ, $availableProjects))
+                        <li class="nav-item">
+                            <a href="{{ route('retailerefsjreadystock') }}">EFSJ</a>
+                        </li>
+                    @endif
+
+                    @if (in_array(App\Enums\Projects::FEATHERLIGHT, $availableProjects))
+                        <li class="nav-item">
+                            <a href="{{ route('retailerfeatherlightreadystock') }}">Featherlight</a>
+                        </li>
+                    @endif
+
+                    @if (in_array(App\Enums\Projects::SJRUMI, $availableProjects))
+                        <li class="nav-item">
+                            <a href="{{ route('retailerSJrumireadyStock') }}">SJRumi</a>
+                        </li>
+                    @endif
+
+
                 </ul>
             </div>
         </section>
@@ -342,10 +412,9 @@
                                                             fill="#ADADAD" />
                                                     </svg>
                                                 </span>
-                                                <input required type="text" 
-                                                 id="phoneNumber"
-                                                 oninput="this.value = this.value.replace(/[^0-9]/g, '');" 
-                                                 minlength="10" maxlength="10" 
+                                                <input required type="text" id="phoneNumber"
+                                                    oninput="this.value = this.value.replace(/[^0-9]/g, '');"
+                                                    minlength="10" maxlength="10"
                                                     class="form-control border-0 shadow-none"
                                                     placeholder="Enter phone number" aria-label="Phone Number"
                                                     aria-describedby="login page">
@@ -465,9 +534,9 @@
                                                 <label class="form-label fw-medium" for="signupPhoneNumber">Phone
                                                     Number<span class="text-danger">*</span></label>
                                                 <input required placeholder="Enter your phone number"
-                                                    class="form-control" type="text" 
-                                                    oninput="this.value = this.value.replace(/[^0-9]/g, '');" 
-                                                    minlength="10" maxlength="10"  name="signupPhoneNumber"
+                                                    class="form-control" type="text"
+                                                    oninput="this.value = this.value.replace(/[^0-9]/g, '');"
+                                                    minlength="10" maxlength="10" name="signupPhoneNumber"
                                                     id="signupPhoneNumber" value="{{ session('mobile') ?? '' }}" />
                                             </div>
 

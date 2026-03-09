@@ -41,6 +41,14 @@
                 App\Enums\Projects::CASTING,
                 App\Enums\Projects::UTENSIL,
                 App\Enums\Projects::INIDIANIA,
+                App\Enums\Projects::SJRUMI,
+                App\Enums\Projects::COIN,
+                App\Enums\Projects::PAYAL,
+                App\Enums\Projects::EFSJ,
+                App\Enums\Projects::FEATHERLIGHT,
+                App\Enums\Projects::IMPRESSA,
+                App\Enums\Projects::MMD,
+                App\Enums\Projects::KUWATI,
             ];
 
             if (in_array($currentProjectId, $validProjects)) {

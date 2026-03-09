@@ -9,7 +9,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-
+use Illuminate\Support\Facades\File;
 use App\Imports\ImportStockUpdate;
 use App\Models\Product;
 use App\Models\StockImport;
@@ -50,6 +50,21 @@ class ImportStockJob implements ShouldQueue
             Log::debug('Processed product IDs: ', $processedProductIds);
             // Reset qty to 0 for all products not processed in this import
             Product::whereNotIn('id', $processedProductIds)->update(['qty' => 0]);
+
+            // Update image_exists column
+            $products = Product::whereIn('id', $processedProductIds)
+                ->select('id', 'product_image')
+                ->get();
+
+            foreach ($products as $product) {
+
+                $imagePath = public_path('upload/product/' . $product->product_image);
+
+                $exists = File::exists($imagePath) ? 1 : 0;
+
+                Product::where('id', $product->id)
+                    ->update(['image_exists' => $exists]);
+            }
             // Update import status to completed
             StockImport::where('file_path', $this->filePath)->update(['status' => 'completed']);
             // Optionally log success or notify admin/user
