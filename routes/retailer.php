@@ -68,7 +68,7 @@ Route::prefix('retailer')->group(function () {
         Route::get('indianiareadystock', [\App\Http\Controllers\Retailer\EF\ReadyStockController::class, 'indianiaReadyStock'])->name('retailerindianiareadystock');
         Route::get('utensilreadystock', [\App\Http\Controllers\Retailer\EF\ReadyStockController::class, 'utensilReadyStock'])->name('retailerutensilreadystock');
         Route::get('mmdreadystock', [\App\Http\Controllers\Retailer\EF\ReadyStockController::class, 'mmdReadyStock'])->name('retailermmdreadystock');
-        Route::get('sjrumireadyStock', [\App\Http\Controllers\Retailer\EF\ReadyStockController::class, 'sjrumireadyStock'])->name('retailerSJrumireadyStock');
+        Route::get('sjrumireadyStock', [\App\Http\Controllers\Retailer\EF\ReadyStockController::class, 'sjrumireadyStock'])->name('retailersjrumireadystock');
         Route::get('efsjreadystock', [\App\Http\Controllers\Retailer\EF\ReadyStockController::class, 'efsjreadyStock'])->name('retailerefsjreadystock');
         Route::get('payalreadystock', [\App\Http\Controllers\Retailer\EF\ReadyStockController::class, 'payalReadyStock'])->name('retailerpayalreadystock');
         Route::get('featherlightreadystock', [\App\Http\Controllers\Retailer\EF\ReadyStockController::class, 'featherlightreadyStock'])->name('retailerfeatherlightreadystock');

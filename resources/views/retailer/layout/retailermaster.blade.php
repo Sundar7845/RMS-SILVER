@@ -217,7 +217,7 @@
 
                     @if (in_array(App\Enums\Projects::SJRUMI, $availableProjects))
                         <li class="nav-item">
-                            <a href="{{ route('retailerSJrumireadyStock') }}">SJRumi</a>
+                            <a href="{{ route('retailersjrumireadystock') }}">SJRumi</a>
                         </li>
                     @endif
 

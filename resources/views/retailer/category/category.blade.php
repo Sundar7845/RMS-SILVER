@@ -135,7 +135,7 @@
                 @endif
                 @if (in_array($sjrumi, $availableProjects))
                     <div class="category-card-item">
-                        <a href="{{ route('retailerSJrumireadyStock') }}" class="text-decoration-none">
+                        <a href="{{ route('retailersjrumireadystock') }}" class="text-decoration-none">
                             <div class="card category-page-card">
                                 <div class="card-body">
                                     <div class="d-flex flex-column gap-2 align-items-center">

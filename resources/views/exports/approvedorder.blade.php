@@ -76,7 +76,7 @@
             <th style="font-weight: bold;background-color:yellow;border: 1px solid #000;">Address</th>
             @foreach ($details as $detail)
                 <th style="font-weight: bold;border: 1px solid #000;">
-                    {{ $detail->address, $detail->district, '-', $detail->pincode }}</th>
+                    {{ $detail->address . ', ' . $detail->district . ', ' . $detail->pincode }}</th>
                 <!-- Displaying each item's 'name' property in C cell -->
                 @php
                     break;

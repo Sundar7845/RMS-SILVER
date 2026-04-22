@@ -36,7 +36,7 @@
         Utensil
     @elseif($currentUrl == route('retailermmdreadystock'))
         MMD
-    @elseif($currentUrl == route('retailerSJrumireadyStock'))
+    @elseif($currentUrl == route('retailersjrumireadystock'))
         SJ-RUMI
     @elseif($currentUrl == route('retailerefsjreadystock'))
         EFSJ
@@ -78,6 +78,9 @@
     $jewelcategories = App\Models\Category::where('is_active', 1)
         ->where('project_id', App\Enums\Projects::CASTING)
         ->whereNull('deleted_at')
+        ->whereHas('products', function ($q) {
+            $q->where('qty', '>', 0);
+        })
         ->get();
     // List of URLs to exclude
     $excludedUrls = [
