@@ -74,7 +74,7 @@ class Products extends Command
             $items = DB::select("
                 SELECT *
                 FROM localproducts
-                WHERE project = 'ELECTRO FORMING'
+                WHERE project = 'SIL COIN'
                 ORDER BY id ASC
             ");
 
@@ -160,7 +160,7 @@ class Products extends Command
                         'project_id' => $projectId,
 
                         'category_id' => $categoryId,
-                        'sub_category_id' => $subCategoryId,
+                        'sub_category_id' => $subCategoryId ?? 1,
                         'collection_id' => $collectionId,
                         'sub_collection_id' => $subCollectionId,
 

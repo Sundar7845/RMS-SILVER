@@ -21,7 +21,6 @@
                     ->unique()
                     ->values()
                     ->toArray();
-                
                 $electroProjectId = App\Models\Project::where('project_name', 'ELECTRO FORMING')->value('id');
                 $solidIdols = App\Models\Project::where('project_name', 'SIL SOLID IDOL')->value('id');
                 $jewellery = App\Models\Project::where('project_name', 'SIL CASTING')->value('id');

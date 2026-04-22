@@ -341,7 +341,7 @@ class ReadyStockController extends Controller
         return view('retailer.readystock.readystock', compact('allProduct', 'product', 'decryptedProjectId', 'project_id', 'breadcrum', 'breadcrumUrl', 'stock'));
     }
 
-    public function payalReadyStock(Request $request)
+     public function payalReadyStock(Request $request)
     {
         $user_id = Auth::user()->id;
         $product = Product::select('products.*', 'wishlists.is_favourite')

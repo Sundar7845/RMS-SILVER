@@ -54,7 +54,7 @@ class subcollection extends Command
                 crwsubcolcode,
                 project
             FROM localproducts
-            WHERE project = 'ELECTRO FORMING'
+            WHERE project = 'SIL COIN'
               AND crwcolcode IS NOT NULL
               AND crwcolcode != ''
               AND crwsubcolcode IS NOT NULL

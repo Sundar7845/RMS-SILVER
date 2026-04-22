@@ -307,7 +307,6 @@ class LoginController extends Controller
             ->update([
                 'logout_at' => now()
             ]);
-
         Auth::logout();
         Session::flush();
         request()->session()->invalidate();

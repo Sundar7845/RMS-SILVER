@@ -330,4 +330,5 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('customerlist', [\App\Http\Controllers\Backend\Customer\CustomerController::class, 'customerList'])->name('customerlist');
     Route::get('customerdata', [\App\Http\Controllers\Backend\Customer\CustomerController::class, 'customerData'])->name('customerdata');
     Route::get('customerlogdata', [\App\Http\Controllers\Backend\Customer\CustomerController::class, 'customerLogData'])->name('customerlogdata');
+
 });

@@ -162,6 +162,7 @@ class OrderController extends Controller
 
     function approvedOrder()
     {
+        ini_set('memory_limit', '2048M');
         if ($this->permissionCheck(Auth::user()->id, 'Approved Orders')) {
             $users = User::where('role_id', Roles::Retailer)->get();
             $roles = Role::whereNotIn('id', [Roles::SuperAdmin, Roles::Admin])
@@ -202,6 +203,7 @@ class OrderController extends Controller
 
     function approvedOrderData(Request $request)
     {
+        ini_set('memory_limit', '2048M');
         $order = "";
         $order = Order::select(
             'orders.id',

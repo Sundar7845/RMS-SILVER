@@ -75,12 +75,14 @@
         ->where('project_id', App\Enums\Projects::ELECTROFORMING)
         ->whereNull('deleted_at')
         ->get();
-    $jewelcategories = App\Models\Category::where('is_active', 1)
-        ->where('project_id', App\Enums\Projects::CASTING)
-        ->whereNull('deleted_at')
-        ->whereHas('products', function ($q) {
-            $q->where('qty', '>', 0);
-        })
+    $jewelcategories = App\Models\Category::select('categories.*')
+        ->join('products', 'products.category_id', '=', 'categories.id')
+        ->where('categories.is_active', 1)
+        ->where('categories.project_id', App\Enums\Projects::CASTING)
+        ->whereNull('categories.deleted_at')
+        ->where('products.qty', '>', 0)
+        ->where('products.image_exists', 1)
+        ->groupBy('categories.id')
         ->get();
     // List of URLs to exclude
     $excludedUrls = [
@@ -310,7 +312,6 @@
 
                                 {{-- box --}}
                                 @if (in_array($currentProjectId, $validProjects))
-                                    {
                                     <div class="tab-pane fade" id="mobileBoxFilter" role="tabpanel"
                                         aria-labelledby="mobBoxFilter" tabindex="0">
                                         <div class="filter-inputs_wrapper" id="mobile-box-filters">

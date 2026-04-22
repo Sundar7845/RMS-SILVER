@@ -21,7 +21,6 @@
                                     <th class="text-light">S.No</th>
                                     <th class="text-light">Name</th>
                                     <th class="text-light">Mobile</th>
-                                    <th class="text-light">Zone</th>
                                     <th class="text-light">Last Login</th>
                                     <th class="text-light">Last Activity</th>
                                 </tr>
