@@ -4,6 +4,7 @@
 .env
 /public/storage
 /public/upload  
+/public/pdf  
 *.log
 *.sql
 *.zip
